@@ -1,0 +1,5 @@
+
+.vs/*
+src/*/bin/*
+src/*/obj/*
+src/*/appsettings.development.json
