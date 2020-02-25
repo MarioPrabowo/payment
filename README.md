@@ -8,7 +8,16 @@
 * Staff might have different roles other than just approving payments, hence why the property in Payment is called Approver, but the Domain object is called Staff
 * Once payments are approved, they will deduct customer's current balance
 * Paging is required for payments as they will grow overtime, even for a single customer
-# Potential Future Requirements:
+* All errors thrown by business logic will be treated as error code 400 (bad request), whereas any other errors will be treated as error code 500 (internal server error)
+# Code Architecture
+# Test Architecture
+# Pre-requisites
+* Visual Studio and .NET Core 3.1 SDK installed
+* NuGet package manager configured
+# Running the API
+No configs required, this can be run directly from VS as long as all pre-requisites are met.
+# Future Requirements:
+* To keep it simple, the API is unversioned at the moment. Ideally, the major version numbers should be pre-determined, but should also be appended by auto-generated minor version number, such as from build number/generated randomly, to prevent version being accidentally overwritten
 * Required fields validation in EF Core is only a safeguard. Ideally, the required validation should also be put in front-end. Although it is tempting to make front-end read required fields list from back-end, it is not always the best idea as the fields shown in front-end doesn't necessarily be exactly the same as in DB, and even if they are the same, the fields in front-end screen might come from multiple APIs, which will add complexity when trying to reuse validation schema from back-end.
 * If needed, exceptions can contain extra information that can be used by front-end to display more detailed information, which should be returned as JSON in the response
 * Infrastructure layer can be added which contains items such as:
@@ -18,6 +27,7 @@
 ** Audit, e.g. using Audit.NET with table storage
 ** Feature flags
 ** Any external APIs
+* Code coverage can be incorporated in build plan using leaflet, or run manually using VS built-in code coverage report tool
 * Dates are stored in UTC to handle multiple timezones. The timezones can be saved per customer or per branch/office (if branch/office concept is introduced). Date formatting is mainly handled by front-end and back-end should just store timezone information and return UTC dates by default.
 * Customers might require periodical statements, which might contain balance and list of payments. This can be added easily by adding CustomerStatement domain object, which can be populated by:
 ** Azure functions using scheduled messages from Service Bus (https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-sequencing#scheduled-messages) if the statement dates are different per customer, or
