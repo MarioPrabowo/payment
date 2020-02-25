@@ -11,7 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.InMemory", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Application\Application.csproj", "{9BEB1B45-153D-4DEA-99DF-17535689CBB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{2AF0CE01-B85C-4CBF-BB21-D8CCC0749984}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{2AF0CE01-B85C-4CBF-BB21-D8CCC0749984}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.PaymentApi.Integration.Tests", "tests\Presentation.PaymentApi.Integration.Tests\Presentation.PaymentApi.Integration.Tests.csproj", "{3A5B2C09-11AC-42AB-BB16-37DA6AF28976}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{43324B65-C5AB-4DDC-9534-DD4C367C0FEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUtils", "tests\TestUtils\TestUtils.csproj", "{AF70A511-F2EF-4949-A4C2-7FE3A33E2F49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,18 @@ Global
 		{2AF0CE01-B85C-4CBF-BB21-D8CCC0749984}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AF0CE01-B85C-4CBF-BB21-D8CCC0749984}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AF0CE01-B85C-4CBF-BB21-D8CCC0749984}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A5B2C09-11AC-42AB-BB16-37DA6AF28976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A5B2C09-11AC-42AB-BB16-37DA6AF28976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A5B2C09-11AC-42AB-BB16-37DA6AF28976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A5B2C09-11AC-42AB-BB16-37DA6AF28976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43324B65-C5AB-4DDC-9534-DD4C367C0FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43324B65-C5AB-4DDC-9534-DD4C367C0FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43324B65-C5AB-4DDC-9534-DD4C367C0FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43324B65-C5AB-4DDC-9534-DD4C367C0FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF70A511-F2EF-4949-A4C2-7FE3A33E2F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF70A511-F2EF-4949-A4C2-7FE3A33E2F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF70A511-F2EF-4949-A4C2-7FE3A33E2F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF70A511-F2EF-4949-A4C2-7FE3A33E2F49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

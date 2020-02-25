@@ -36,13 +36,13 @@ namespace Persistence.InMemory
 		{
 			return await (from s in _ctx.Staff
 						  where s.ID == staffID
-						  select s).FirstOrDefaultAsync();
+						  select s).AsNoTracking().FirstOrDefaultAsync();
 		}
 
 		public async Task<List<Staff>> GetStaffListAsync()
 		{
 			return await (from s in _ctx.Staff
-						  select s).ToListAsync();
+						  select s).AsNoTracking().ToListAsync();
 		}
 
 		public async Task<Staff> UpdateStaffAsync(Staff staff)

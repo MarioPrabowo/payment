@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Infrastructure;
 using MediatR;
 using Persistence;
 using System;
@@ -17,11 +18,13 @@ namespace Application
 		{
 			private readonly IPaymentRepository _paymentRepo;
 			private readonly ICustomerRepository _customerRepo;
+			private readonly IDateProvider _dateProvider;
 
-			public Handler(IPaymentRepository paymentRepo, ICustomerRepository customerRepo)
+			public Handler(IPaymentRepository paymentRepo, ICustomerRepository customerRepo, IDateProvider dateProvider)
 			{
 				_paymentRepo = paymentRepo;
 				_customerRepo = customerRepo;
+				_dateProvider = dateProvider;
 			}
 
 			public async Task<Payment> Handle(CreatePaymentRequest request, CancellationToken cancellationToken)
@@ -32,15 +35,23 @@ namespace Application
 					throw new AmountMustBeGreaterThanZeroException();
 				}
 
-				request.Payment.RequestedDateUtc = DateTime.UtcNow;
-				
 
 				// Check customer balance
-				var customer = await _customerRepo.GetCustomerAsync(request.Payment.RequesterID);
+				var customer = await _customerRepo.GetCustomerAsync(request.Payment.CustomerID);
+
+				if(customer == null)
+				{
+					throw new CustomerNotFoundException();
+				}
+
+				// Call it here so the utc time is consistent between requested and processed dates
+				var utcNow = _dateProvider.GetUtcNow();
+
+				request.Payment.RequestedDateUtc = utcNow;
 
 				if (customer.CurrentBalance < request.Payment.Amount)
 				{
-					request.Payment.ProcessedDateUtc = DateTime.UtcNow;
+					request.Payment.ProcessedDateUtc = utcNow;
 					request.Payment.PaymentStatus = PaymentStatus.Closed;
 					request.Payment.Comment = Payment.InsufficientFundComment;
 				}

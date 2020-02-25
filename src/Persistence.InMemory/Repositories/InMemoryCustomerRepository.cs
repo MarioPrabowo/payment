@@ -36,13 +36,13 @@ namespace Persistence.InMemory
 		{
 			return await (from c in _ctx.Customer
 						  where c.ID == customerID
-						  select c).FirstOrDefaultAsync();
+						  select c).AsNoTracking().FirstOrDefaultAsync();
 		}
 
 		public async Task<List<Customer>> GetCustomerListAsync()
 		{
 			return await (from c in _ctx.Customer
-						  select c).ToListAsync();
+						  select c).AsNoTracking().ToListAsync();
 		}
 
 		public async Task AdjustBalanceAsync(Guid customerID, decimal adjustmentAmount)

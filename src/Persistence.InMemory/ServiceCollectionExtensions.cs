@@ -11,7 +11,7 @@ namespace Persistence.InMemory
 {
 	public static class ServiceCollectionExtensions
 	{
-		public static IServiceCollection AddInMemoryServices([NotNullAttribute] this IServiceCollection serviceCollection)
+		public static IServiceCollection AddInMemoryDbServices([NotNullAttribute] this IServiceCollection serviceCollection)
 		{
 			if (!serviceCollection.Any(s => s.ServiceType.IsAssignableFrom(typeof(PaymentDbContext))))
 			{
@@ -19,7 +19,7 @@ namespace Persistence.InMemory
 				{
 					if (!optionsBuilder.IsConfigured)
 					{
-						optionsBuilder.UseInMemoryDatabase(databaseName: "PaymentInMemoryDB");
+						optionsBuilder.UseInMemoryDatabase(databaseName: PaymentDbContext.DbName);
 					}
 				});
 			}

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application;
+using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,8 +28,9 @@ namespace PaymentApi
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
-			services.AddInMemoryServices();
-
+			services.AddInMemoryDbServices();
+			services.AddSingleton<IDateProvider, SystemDateProvider>();
+			services.SetupMediatr();
 			//TODO: add exception error code mapping here
 		}
 

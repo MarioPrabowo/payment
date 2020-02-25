@@ -11,6 +11,8 @@ namespace Persistence.InMemory
 {
 	public class PaymentDbContext : DbContext
 	{
+		public static readonly string DbName = "PaymentInMemoryDB";
+
 		public virtual DbSet<Payment> Payment { get; set; }
 		public virtual DbSet<Staff> Staff { get; set; }
 		public virtual DbSet<Customer> Customer { get; set; }
@@ -29,13 +31,19 @@ namespace Persistence.InMemory
 				entity.Property(e => e.Amount).IsRequired();
 				entity.Property(e => e.PaymentDateUtc).IsRequired();
 
-				entity.HasOne(e => e.Requester)
+				entity.HasOne(e => e.Customer)
 					.WithMany()
-					.HasForeignKey(e => e.RequesterID);
+					.HasForeignKey(e => e.CustomerID);
 
 				entity.HasOne(e => e.Approver)
 					.WithMany()
 					.HasForeignKey(e => e.ApproverID);
+
+				entity.Property(e => e.PaymentStatus)
+					.HasConversion(
+						s => s.ToString(),
+						s => (PaymentStatus)Enum.Parse(typeof(PaymentStatus), s)
+					);	
 			});
 
 			modelBuilder.Entity<Staff>(entity =>

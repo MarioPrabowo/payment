@@ -27,20 +27,20 @@ namespace Persistence.InMemory
 		public async Task<List<Payment>> GetPaymentListAsync(Guid customerID, int skip, int take)
 		{
 			return await (from p in _ctx.Payment
-						  where p.RequesterID == customerID
-						  select p).OrderByDescending(p => p.PaymentDateUtc).Skip(skip).Take(take).ToListAsync();
+						  where p.CustomerID == customerID
+						  select p).AsNoTracking().OrderByDescending(p => p.PaymentDateUtc).Skip(skip).Take(take).ToListAsync();
 		}
 
 		public async Task<Payment> GetPaymentAsync(Guid paymentID)
 		{
 			return await (from p in _ctx.Payment
 						  where p.ID == paymentID
-						  select p).FirstOrDefaultAsync();
+						  select p).AsNoTracking().FirstOrDefaultAsync();
 		}
 
 		public async Task<Payment> UpdatePaymentAsync(Payment payment)
 		{
-			_ctx.Add(payment);
+			_ctx.Update(payment);
 			
 			await _ctx.SaveChangesAsync();
 

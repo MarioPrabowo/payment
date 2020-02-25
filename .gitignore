@@ -1,5 +1,8 @@
 
 .vs/*
-src/*/bin/*
-src/*/obj/*
-src/*/appsettings.development.json
+*/*/bin/*
+*/*/obj/*
+*/*/appsettings.development.json
+tests/Presentation.PaymentApi.Integration.Tests/Properties/launchSettings.json
+
+src/Presentation.PaymentApi/Presentation.PaymentApi.csproj.user
