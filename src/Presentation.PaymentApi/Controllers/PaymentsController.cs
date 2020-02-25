@@ -31,7 +31,7 @@ namespace Presentation.PaymentApi
         [HttpPatch("{id}")]
         public Task<Payment> Process(Guid id, Payment payment)
         {
-            if (id != payment.ID) throw new IdMismatchException(id, payment.ID);
+            if (id != payment.ID) throw new IdMismatchException();
 
             return _mediator.Send(new ProcessPaymentRequest
             {

@@ -21,7 +21,7 @@ namespace Presentation.PaymentApi
         [HttpPatch("{id}")]
         public Task<Customer> Update(Guid id, Customer customer, [FromServices] ICustomerRepository customerRepo)
         {
-            if (id != customer.ID) throw new IdMismatchException(id, customer.ID);
+            if (id != customer.ID) throw new IdMismatchException();
 
             return customerRepo.UpdateCustomerAsync(customer);
         }
@@ -47,7 +47,7 @@ namespace Presentation.PaymentApi
         [HttpPut("{id}/CurrentBalance")]
         public async Task TopUpBalance(Guid id, TopUpCustomerBalanceDto topUpDto, [FromServices] IMediator mediator)
         {
-            if (id != topUpDto.CustomerID) throw new IdMismatchException(id, topUpDto.CustomerID);
+            if (id != topUpDto.CustomerID) throw new IdMismatchException();
 
             await mediator.Send(new TopUpCustomerBalanceRequest
             {

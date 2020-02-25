@@ -20,7 +20,7 @@ namespace Presentation.PaymentApi
         [HttpPatch("{id}")]
         public Task<Staff> Update(Guid id, Staff staff, [FromServices] IStaffRepository staffRepo)
         {
-            if (id != staff.ID) throw new IdMismatchException(id, staff.ID);
+            if (id != staff.ID) throw new IdMismatchException();
 
             return staffRepo.UpdateStaffAsync(staff);
         }

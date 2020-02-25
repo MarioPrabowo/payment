@@ -9,7 +9,7 @@ namespace Domain
 	/// so loading them into memory through navigation property can cause issues. If we need to get customer's payments,
 	/// getting them through queries would be best.
 	/// </summary>
-	public class Customer
+	public class Customer: IDeletable
 	{
 		public Guid ID { get; set; }
 		public string Surname { get; set; }

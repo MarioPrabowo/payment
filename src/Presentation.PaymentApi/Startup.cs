@@ -14,24 +14,34 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Persistence.InMemory;
 
-namespace PaymentApi
+namespace Presentation.PaymentApi
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration)
+		public Startup(IConfiguration configuration, IWebHostEnvironment env)
 		{
-			Configuration = configuration;
+			this.Configuration = configuration;
+			this.Env = env;
 		}
 
 		public IConfiguration Configuration { get; }
-		
+		public IWebHostEnvironment Env { get; }
+
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllers();
+			services.AddControllers(options => {
+				if (this.Env.IsDevelopment())
+				{
+					options.Filters.Add<DevelopmentExceptionHandler>();
+				}
+				else
+				{
+					options.Filters.Add<ProductionExceptionHandler>();
+				}
+			});
 			services.AddInMemoryDbServices();
 			services.AddSingleton<IDateProvider, SystemDateProvider>();
 			services.SetupMediatr();
-			//TODO: add exception error code mapping here
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

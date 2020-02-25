@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace PaymentApi
+namespace Presentation.PaymentApi
 {
 	public class Program
 	{

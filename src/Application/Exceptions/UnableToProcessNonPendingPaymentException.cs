@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application
 {
-	public class UnableToProcessNonPendingPaymentException: ApplicationException
+	public class UnableToProcessNonPendingPaymentException: BusinessLogicException
 	{
 	}
 }
