@@ -29,7 +29,7 @@ namespace Application
 
 			public async Task<Payment> Handle(ProcessPaymentRequest request, CancellationToken cancellationToken)
 			{
-				// Check that the payment has been approved
+				// Check that the payment has approver
 				if(request.Payment.ApproverID == Guid.Empty)
 				{
 					throw new ApproverMissingException();
@@ -43,9 +43,21 @@ namespace Application
 					throw new StaffNotFoundException();
 				}
 
+				// Make sure payment and customer exist
+				var customer = await _customerRepo.GetCustomerAsync(request.Payment.CustomerID);
+				if (customer == null)
+				{
+					throw new CustomerNotFoundException();
+				}
+
+				var existingPayment = await _paymentRepo.GetPaymentAsync(request.Payment.ID);
+				if (existingPayment == null)
+				{
+					throw new PaymentNotFoundException();
+				}
+
 				// Check payment status, make sure it's pending
-				var payment = await _paymentRepo.GetPaymentAsync(request.Payment.ID);
-				if(payment.PaymentStatus != PaymentStatus.Pending)
+				if (existingPayment.PaymentStatus != PaymentStatus.Pending)
 				{
 					throw new UnableToProcessNonPendingPaymentException();
 				}
@@ -60,8 +72,12 @@ namespace Application
 				request.Payment.ProcessedDateUtc = _dateProvider.GetUtcNow();
 				await _paymentRepo.UpdatePaymentAsync(request.Payment);
 
-				// If processed, deduct customer's balance
-				await _customerRepo.AdjustBalanceAsync(request.Payment.CustomerID, -request.Payment.Amount);
+				// If not processed, re-adjust customer's balance
+				if (request.Payment.PaymentStatus != PaymentStatus.Processed)
+				{
+					customer.CurrentBalance += request.Payment.Amount;
+					await _customerRepo.UpdateCustomerAsync(customer);
+				}
 
 				return request.Payment;
 			}

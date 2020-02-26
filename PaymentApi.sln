@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUtils", "tests\TestUtils\TestUtils.csproj", "{AF70A511-F2EF-4949-A4C2-7FE3A33E2F49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.PaymentApi.Tests", "tests\Presentation.PaymentApi.Tests\Presentation.PaymentApi.Tests.csproj", "{3B3E7C7D-80F4-4479-840A-8592FF175FD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.PaymentApi.Tests", "tests\Presentation.PaymentApi.Tests\Presentation.PaymentApi.Tests.csproj", "{3B3E7C7D-80F4-4479-840A-8592FF175FD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Tests", "tests\Application.Tests\Application.Tests.csproj", "{FD3B6911-303D-4889-907A-2A199439465C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{3B3E7C7D-80F4-4479-840A-8592FF175FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B3E7C7D-80F4-4479-840A-8592FF175FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B3E7C7D-80F4-4479-840A-8592FF175FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD3B6911-303D-4889-907A-2A199439465C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD3B6911-303D-4889-907A-2A199439465C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD3B6911-303D-4889-907A-2A199439465C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD3B6911-303D-4889-907A-2A199439465C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

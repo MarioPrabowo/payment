@@ -30,7 +30,14 @@ namespace Application
 				}
 
 				// Top up
-				await _customerRepo.AdjustBalanceAsync(request.TopUpCustomerBalanceDto.CustomerID, request.TopUpCustomerBalanceDto.TopUpAmount);
+				var customer = await _customerRepo.GetCustomerAsync(request.TopUpCustomerBalanceDto.CustomerID);
+				if(customer == null)
+				{
+					throw new CustomerNotFoundException();
+				}
+
+				customer.CurrentBalance += request.TopUpCustomerBalanceDto.TopUpAmount;
+				await _customerRepo.UpdateCustomerAsync(customer);
 
 				return Unit.Value;
 			}

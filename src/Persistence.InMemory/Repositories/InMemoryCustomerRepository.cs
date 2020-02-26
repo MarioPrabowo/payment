@@ -45,36 +45,21 @@ namespace Persistence.InMemory
 						  select c).AsNoTracking().ToListAsync();
 		}
 
-		public async Task AdjustBalanceAsync(Guid customerID, decimal adjustmentAmount)
-		{
-			await ValidateDeletion(customerID);
-
-			var customer = await this.GetCustomerAsync(customerID);
-			customer.CurrentBalance += adjustmentAmount;
-			_ctx.Update(customer);
-			await _ctx.SaveChangesAsync();
-		}
-
 		public async Task<Customer> UpdateCustomerAsync(Customer customer)
 		{
-			await ValidateDeletion(customer.ID);
-
-			_ctx.Update(customer);
-			await _ctx.SaveChangesAsync();
-
-			return customer;
-		}
-
-		private async Task ValidateDeletion(Guid customerID)
-		{
 			var isDeleted = await (from c in _ctx.Customer
-								   where c.ID == customerID
+								   where c.ID == customer.ID
 								   select c.IsDeleted).FirstOrDefaultAsync();
 
 			if (isDeleted)
 			{
 				throw new UnableToUpdateDeletedRecordsException();
 			}
+
+			_ctx.Update(customer);
+			await _ctx.SaveChangesAsync();
+
+			return customer;
 		}
 	}
 }

@@ -35,6 +35,11 @@ namespace Application
 					throw new AmountMustBeGreaterThanZeroException();
 				}
 
+				// Check that the payment has no approver
+				if (request.Payment.ApproverID != Guid.Empty)
+				{
+					throw new UnexpectedApproverOnPaymentCreationException();
+				}
 
 				// Check customer balance
 				var customer = await _customerRepo.GetCustomerAsync(request.Payment.CustomerID);
@@ -62,6 +67,10 @@ namespace Application
 				}
 
 				await _paymentRepo.CreatePaymentAsync(request.Payment);
+
+				// Adjust customer's balance
+				customer.CurrentBalance -= request.Payment.Amount;
+				await _customerRepo.UpdateCustomerAsync(customer);
 
 				return request.Payment;
 			}

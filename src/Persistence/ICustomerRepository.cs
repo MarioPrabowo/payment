@@ -12,6 +12,5 @@ namespace Persistence
 		Task DeleteCustomerAsync(Guid customerID);
 		Task<Customer> GetCustomerAsync(Guid customerID);
 		Task<List<Customer>> GetCustomerListAsync();
-		Task AdjustBalanceAsync(Guid customerID, decimal adjustmentAmount);
 	}
 }

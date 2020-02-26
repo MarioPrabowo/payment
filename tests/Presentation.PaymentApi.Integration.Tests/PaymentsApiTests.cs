@@ -87,7 +87,7 @@ namespace Presentation.PaymentApi.Integration.Tests
 				result.Should().BeEquivalentTo(paymentInDb, options => options.Excluding(p => p.Customer));
 
 				var customerInDb = await ctx.Customer.FirstOrDefaultAsync();
-				Assert.Equal(customer.CurrentBalance, customerInDb.CurrentBalance);
+				Assert.Equal(customer.CurrentBalance - payment.Amount, customerInDb.CurrentBalance);
 			}
 		}
 
@@ -151,7 +151,7 @@ namespace Presentation.PaymentApi.Integration.Tests
 				result.Should().BeEquivalentTo(paymentInDb, options => options.Excluding(p => p.Customer).Excluding(p => p.Approver));
 
 				var customerInDb = await ctx.Customer.FirstOrDefaultAsync();
-				Assert.Equal(customer.CurrentBalance - payment.Amount, customerInDb.CurrentBalance);
+				Assert.Equal(customer.CurrentBalance, customerInDb.CurrentBalance);
 			}
 		}
 	}
