@@ -3,6 +3,7 @@
 */*/bin/*
 */*/obj/*
 */*/appsettings.development.json
-tests/Presentation.PaymentApi.Integration.Tests/Properties/launchSettings.json
-
+tests/*/Properties/launchSettings.json
 src/Presentation.PaymentApi/Presentation.PaymentApi.csproj.user
+
+

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Application;
+﻿using Application;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Persistence;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Presentation.PaymentApi
 {
@@ -13,13 +13,13 @@ namespace Presentation.PaymentApi
     public class CustomersController : ControllerBase
     {
         [HttpPost]
-        public Task<Customer> Create(Customer customer, [FromServices] ICustomerRepository customerRepo)
+        public Task<Customer> CreateCustomer(Customer customer, [FromServices] ICustomerRepository customerRepo)
         {
             return customerRepo.CreateCustomerAsync(customer);
         }
 
         [HttpPatch("{id}")]
-        public Task<Customer> Update(Guid id, Customer customer, [FromServices] ICustomerRepository customerRepo)
+        public Task<Customer> UpdateCustomer(Guid id, Customer customer, [FromServices] ICustomerRepository customerRepo)
         {
             if (id != customer.ID) throw new IdMismatchException();
 
@@ -27,19 +27,19 @@ namespace Presentation.PaymentApi
         }
 
         [HttpDelete("{id}")]
-        public Task Delete(Guid id,[FromServices] ICustomerRepository customerRepo)
+        public Task DeleteCustomer(Guid id,[FromServices] ICustomerRepository customerRepo)
         {
             return customerRepo.DeleteCustomerAsync(id);
         }
 
         [HttpGet]
-        public Task<List<Customer>> Get([FromServices] ICustomerRepository customerRepo)
+        public Task<List<Customer>> GetCustomers([FromServices] ICustomerRepository customerRepo)
         {
             return customerRepo.GetCustomerListAsync();
         }
 
         [HttpGet("{id}")]
-        public Task<Customer> Get(Guid id, [FromServices] ICustomerRepository customerRepo)
+        public Task<Customer> GetCustomer(Guid id, [FromServices] ICustomerRepository customerRepo)
         {
             return customerRepo.GetCustomerAsync(id);
         }

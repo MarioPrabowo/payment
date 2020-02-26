@@ -13,8 +13,7 @@ using Xunit;
 
 namespace Presentation.PaymentApi.Integration.Tests
 {
-	public class CustomersApiTests
-	: IClassFixture<WebApplicationFactory<Startup>>
+	public class CustomersApiTests : IClassFixture<WebApplicationFactory<Startup>>
 	{
 		private readonly WebApplicationFactory<Startup> _factory;
 		private readonly DbContextCreator _dbContextCreator;

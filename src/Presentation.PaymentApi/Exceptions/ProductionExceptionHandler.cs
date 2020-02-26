@@ -9,10 +9,10 @@ namespace Presentation.PaymentApi
 	{
 		protected override object GetExceptionDetails(Exception ex)
 		{
-			return new
+			return new ProductionExceptionResult
 			{
-				// textStatus is the standard AJAX response message
-				textStatus = ex.Message
+				ExceptionType = ex.GetType().Name,
+				ExceptionMessage = ex.Message
 			};
 		}
 	}

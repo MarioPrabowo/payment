@@ -13,12 +13,12 @@ namespace Presentation.PaymentApi
 	{
 		protected override object GetExceptionDetails(Exception ex)
 		{
-			return new
+			return new DevelopmentExceptionResult
 			{
-				// textStatus is the standard AJAX response message
-				textStatus = ex.Message,
-				baseException = ex.GetBaseException().GetType().Name,
-				stackTrace = ex.StackTrace,
+				ExceptionType = ex.GetType().Name,
+				ExceptionMessage = ex.Message,
+				BaseException = ex.GetBaseException().GetType().Name,
+				StackTrace = ex.StackTrace,
 			};
 		}
 	}

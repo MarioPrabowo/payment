@@ -20,14 +20,7 @@ namespace TestUtils
 		public void Setup(IServiceCollection services)
 		{
 			// Remove the app's DbContext registration.
-			var descriptor = services.SingleOrDefault(
-				d => d.ServiceType ==
-					typeof(DbContextOptions<PaymentDbContext>));
-
-			if (descriptor != null)
-			{
-				services.Remove(descriptor);
-			}
+			services.Remove<DbContextOptions<PaymentDbContext>>();
 
 			// Add ApplicationDbContext using unique in-memory database for testing.
 			services.AddDbContext<PaymentDbContext>((IServiceProvider prov, DbContextOptionsBuilder optionsBuilder) =>

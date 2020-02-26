@@ -20,7 +20,7 @@ namespace Presentation.PaymentApi
         }
 
         [HttpPost]
-        public Task<Payment> Create(Payment payment)
+        public Task<Payment> CreatePayment(Payment payment)
         {
             return _mediator.Send(new CreatePaymentRequest
             {
@@ -29,7 +29,7 @@ namespace Presentation.PaymentApi
         }
 
         [HttpPatch("{id}")]
-        public Task<Payment> Process(Guid id, Payment payment)
+        public Task<Payment> ProcessPayment(Guid id, Payment payment)
         {
             if (id != payment.ID) throw new IdMismatchException();
 
