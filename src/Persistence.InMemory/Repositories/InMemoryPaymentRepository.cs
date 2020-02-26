@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.InMemory
 {
-	internal class InMemoryPaymentRepository: IPaymentRepository
+	public class InMemoryPaymentRepository: IPaymentRepository
 	{
 		private PaymentDbContext _ctx;
 		public InMemoryPaymentRepository(PaymentDbContext ctx)

@@ -8,7 +8,7 @@ This Payment API Repo is an example of a simple WebAPI using .NET Core with Mult
 # Assumptions:
 * Once deleted, customer or staff data can't be updated. They should also be hidden from the list, although the related payment records should still be shown
 * Staff might have different roles other than just approving payments, hence why the property in Payment is called Approver, but the Domain object is called Staff
-* Once payments are approved, they will deduct customer's current balance
+* Once payments are created, they will deduct customer's current balance. If the payment is closed, then the customer will be refunded the amount to their balance.
 * Paging is required for payments as they will grow overtime, even for a single customer
 * All errors thrown by business logic will be treated as error code 400 (bad request), whereas any other errors will be treated as error code 500 (internal server error)
 # Code Architecture

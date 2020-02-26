@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.InMemory
 {
-	internal class InMemoryStaffRepository : IStaffRepository
+	public class InMemoryStaffRepository : IStaffRepository
 	{
 		private PaymentDbContext _ctx;
 		public InMemoryStaffRepository(PaymentDbContext ctx)
@@ -47,9 +47,9 @@ namespace Persistence.InMemory
 
 		public async Task<Staff> UpdateStaffAsync(Staff staff)
 		{
-			var isDeleted = await (from s in _ctx.Staff
-							 where s.ID == staff.ID
-							 select s.IsDeleted).FirstOrDefaultAsync();
+			var isDeleted = await (from s in _ctx.Staff.IgnoreQueryFilters()
+								   where s.ID == staff.ID
+									select s.IsDeleted).FirstOrDefaultAsync();
 
 			if(isDeleted)
 			{
