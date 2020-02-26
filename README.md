@@ -1,6 +1,6 @@
 # Overview:
 This Payment API Repo is an example of a simple WebAPI using .NET Core with Multi-Layered architecture and unit/integration tests. It also demonstrates how to use Dependency Injection using ServiceCollection, Repository Pattern, and MediatR.
-# Business Logic:
+# Requirements:
 * Customers can be added, updated, or deleted. They can also top-up their balance
 * Staff can be added, updated, or deleted
 * Customers can request payments. If they have enough balance, the request will go through, otherwise it will be automatically rejected
